@@ -27,8 +27,10 @@
                             class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium"
                             to="/products/search">Product checken</router-link>
                   </div>
+
                 </div>
               </div>
+                  <drizzle-account></drizzle-account>
             </div>
           </div>
         </nav>
