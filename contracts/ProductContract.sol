@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21 <0.7.0;
 
 contract ProductContract {
@@ -7,23 +8,30 @@ contract ProductContract {
         uint barcode;
     }
     
-    mapping (uint => ProductData) products;
-    
-    function add(uint barcode, string memory location, string memory name) public {
-        products[barcode] = ProductData(name, location, barcode);
+    mapping (uint => ProductData) public productStructs; // the storage of the products
+    uint[] public productList; // keeping track of the amount of products
+
+    function getLocation(uint barcode) public view returns(string memory) {
+        return productStructs[barcode].location;
     }
     
-    // function getProducts() view public returns(string[] memory) {
-    //     return productDb;
-    // }
-    
-    // function getProduct(string memory _hash) view public returns (string memory, string memory) {
-    //     var product = products[_hash];
+    function getName(uint barcode) public view returns(string memory) {
+        return productStructs[barcode].name;
+    }
 
-    //     return (product.name, product.location);
-    // }
+    function add(uint barcode, string memory location, string memory name) public returns(uint) {
+        productStructs[barcode].barcode = barcode;
+        productStructs[barcode].location = location;
+        productStructs[barcode].name = name;
+        productList.push(barcode);
+        return barcode;
+    }
     
-    // function countProducts() view public returns (uint) {
-    //     return productDb.length;
-    // }
+    function all() view public returns(uint[] memory) {
+        return productList;
+    }
+    
+    function count() view public returns (uint) {
+        return productList.length;
+    }
 }
