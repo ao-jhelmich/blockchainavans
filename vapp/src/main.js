@@ -3,6 +3,8 @@ import App from './App.vue'
 import Vuex from 'vuex'
 import ProductOverview from './ProductOverview'
 import ProductForm from './ProductForm'
+import ProductSearch from './ProductSearch'
+import ProductShow from './ProductShow'
 
 import VueRouter from 'vue-router'
 
@@ -21,7 +23,9 @@ const router = new VueRouter({
   routes: [
     { path: '/products', component: ProductOverview },
     { path: '/products/create', component: ProductForm },
-  ] // short for `routes: routes`
+    { path: '/products/search', component: ProductSearch },
+    { path: '/products/:barcode/show', component: ProductShow },
+  ] 
 })
 
 new Vue({
