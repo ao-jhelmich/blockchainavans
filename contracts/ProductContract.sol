@@ -20,8 +20,6 @@ contract ProductContract {
     }
 
     function add(uint barcode, string memory location, string memory name) public returns(uint) {
-        require(!getName(barcode), 'Barcode already exists');
-        
         productStructs[barcode].barcode = barcode;
         productStructs[barcode].location = location;
         productStructs[barcode].name = name;

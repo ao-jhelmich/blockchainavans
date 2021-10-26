@@ -21,6 +21,7 @@ Vue.config.productionTip = false
 
 const router = new VueRouter({
   routes: [
+    { path: '/', redirect: '/products' },
     { path: '/products', component: ProductOverview },
     { path: '/products/create', component: ProductForm },
     { path: '/products/search', component: ProductSearch },

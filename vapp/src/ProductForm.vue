@@ -93,6 +93,9 @@ export default {
         this.form.name
       )
 
+      this.form.barcode = null
+      this.form.location = null
+      this.form.name = null
       // @TODO listen for add event, then clear input
     }, 
 
