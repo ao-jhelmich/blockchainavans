@@ -30,7 +30,7 @@
             id="barcode"
             class="
               mt-1
-              focus:ring-indigo-500 focus:border-indigo-500
+              focus:ring-pink-500 focus:border-pink-500
               block
               w-full
               shadow-sm
@@ -55,12 +55,12 @@
             font-medium
             rounded-md
             text-white
-            bg-indigo-600
-            hover:bg-indigo-700
+            bg-pink-600
+            hover:bg-pink-700
             focus:outline-none
             focus:ring-2
             focus:ring-offset-2
-            focus:ring-indigo-500
+            focus:ring-pink-500
           "
         >
           Zoeken

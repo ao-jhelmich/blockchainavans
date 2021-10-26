@@ -21,7 +21,7 @@
           <router-link :to="`/products/${barcode}/show`" class="block hover:bg-gray-50">
             <div class="px-4 py-4 sm:px-6">
               <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-indigo-600 truncate">
+                <p class="text-sm font-medium text-pink-400 truncate">
                   Product
                 </p>
               </div>
