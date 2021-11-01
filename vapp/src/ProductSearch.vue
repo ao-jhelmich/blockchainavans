@@ -14,7 +14,7 @@
       </div>
     </div>
     
-    <form action="#" method="POST">
+    <form action="#">
       <div class="grid grid-cols-6 gap-6">
         <div class="col-span-6 sm:col-span-4">
           <label for="barcode" class="block text-sm font-medium text-gray-700"

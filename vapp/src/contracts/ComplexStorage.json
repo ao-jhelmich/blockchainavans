@@ -410,7 +410,7 @@
                   "name": "now",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1061,
+                  "referencedDeclaration": 1143,
                   "src": "268:3:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
@@ -2282,7 +2282,7 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 1061,
+                      "referencedDeclaration": 1143,
                       "type": "uint256",
                       "value": "now"
                     },
@@ -3999,7 +3999,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-24T10:53:07.479Z",
+  "updatedAt": "2021-11-01T17:08:35.653Z",
   "devdoc": {
     "methods": {}
   },

@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
+import drizzleVuePlugin from '@drizzle/vue-plugin'
+import drizzleOptions from './drizzleOptions'
+
 import ProductOverview from './ProductOverview'
 import ProductForm from './ProductForm'
 import ProductSearch from './ProductSearch'
 import ProductShow from './ProductShow'
+import Register from './Register'
 
-import VueRouter from 'vue-router'
-
-import drizzleVuePlugin from '@drizzle/vue-plugin'
-import drizzleOptions from './drizzleOptions'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -26,6 +27,7 @@ const router = new VueRouter({
     { path: '/products/create', component: ProductForm },
     { path: '/products/search', component: ProductSearch },
     { path: '/products/:barcode/show', component: ProductShow },
+    { path: '/register', component: Register },
   ] 
 })
 

@@ -1,70 +1,25 @@
 <template>
   <div class="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
     <div v-if="isDrizzleInitialized">
-      <div class="mb-4">
+      <div v-if="errors" class="mb-4">
         <div class="font-medium text-red-600">
           {{ errors }}
         </div>
       </div>
-      <form action="#" method="POST">
+
+      <div v-if="registered">
+        <p class="text-gray-700 text-2xl">Account is al reeds aangemeld, voor: <span v-text="registered"></span></p>
+      </div>
+
+      <form v-else action="#" method="POST">
         <div class="grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-4">
             <label for="barcode" class="block text-sm font-medium text-gray-700"
-              >Barcode</label
-            >
-
-            <input
-              type="number"
-              min="0"
-              placeholder="99999999"
-              v-model="form.barcode"
-              name="barcode"
-              id="barcode"
-              class="
-                mt-1
-                focus:ring-pink-500 focus:border-pink-500
-                block
-                w-full
-                shadow-sm
-                sm:text-sm
-                border-gray-300
-                rounded-md
-              "
-            />
-          </div>
-
-          <div class="col-span-6 sm:col-span-4">
-            <label for="name" class="block text-sm font-medium text-gray-700"
-              >Naam</label
-            >
-
-            <input
-              type="text"
-              v-model="form.name"
-              placeholder="Red label"
-              name="name"
-              id="name"
-              class="
-                mt-1
-                focus:ring-pink-500 focus:border-pink-500
-                block
-                w-full
-                shadow-sm
-                sm:text-sm
-                border-gray-300
-                rounded-md
-              "
-            />
-          </div>
-
-          <div class="col-span-6 sm:col-span-4">
-            <label
-              for="location"
-              class="block text-sm font-medium text-gray-700"
               >Continent</label
             >
+
             <select
-              v-model="form.location"
+              v-model="form.country"
               class="
                 mt-1
                 block
@@ -79,7 +34,6 @@
                 rounded-md
               "
             >
-              <option disabled selected>-</option>
               <option
                 v-for="country in countries"
                 :key="country"
@@ -111,7 +65,7 @@
               focus:ring-pink-500
             "
           >
-            Toevoegen
+            Registreren
           </button>
         </div>
       </form>
@@ -128,18 +82,24 @@ export default {
   name: "ProductForm",
   data() {
     return {
-      errors: null,
       countries: ["azie", "europa", "amerika", "oceanie", "arika"],
+      registered: false,
+      errors: null,
       form: {
-        barcode: null,
-        location: null,
-        name: null,
+        country: null,
       },
     };
   },
 
   computed: {
     ...mapGetters("drizzle", ["drizzleInstance", "isDrizzleInitialized"]),
+  },
+
+  async created() {
+    this.registered =
+      await this.drizzleInstance.contracts.ProductContract.methods
+        .checkUser()
+        .call();
   },
 
   methods: {
@@ -149,17 +109,15 @@ export default {
       }
 
       this.drizzleInstance.contracts["ProductContract"].methods[
-        "add"
-      ].cacheSend(this.form.barcode, this.form.location, this.form.name);
+        "addUser"
+      ].cacheSend(this.form.country);
 
-      this.form.barcode = null;
-      this.form.location = null;
-      this.form.name = null;
       // @TODO listen for add event, then clear input
+      this.form.country = null;
     },
 
     validateForm() {
-      if (!this.form.barcode || !this.form.location || !this.form.name) {
+      if (!this.form.country) {
         this.errors = "Niet alle velden zijn ingevuld";
 
         return false;
