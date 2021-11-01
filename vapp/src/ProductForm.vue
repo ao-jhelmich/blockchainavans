@@ -129,7 +129,7 @@ export default {
   data() {
     return {
       errors: null,
-      countries: ["azie", "europa", "amerika", "oceanie", "arika"],
+      countries: ["azie", "europa", "amerika", "oceanie", "afrika"],
       form: {
         barcode: null,
         location: null,

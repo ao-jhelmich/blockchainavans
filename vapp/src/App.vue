@@ -28,6 +28,11 @@
                             exact-path
                             class="text-white hover:bg-pink-200 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium"
                             to="/register">Registreren</router-link>
+                      <router-link 
+                            active-class="bg-pink-700 text-white rounded-md py-2 px-3 text-sm font-medium"
+                            exact-path
+                            class="text-white hover:bg-pink-200 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium"
+                            to="/penalties">Boetes</router-link>
                   </div>
 
                 </div>
