@@ -91,14 +91,28 @@ export default {
   },
 
   async created() {
-    this.penalty = await this.drizzleInstance.contracts.ProductContract.methods
-      .penalty()
-      .call();
-  const data = 
-    console.log(data)
+    await this.setPenalty()
   },  
 
+  mounted() {
+    this.$drizzleEvents.$on('drizzle/contractEvent', async payload => {
+      const { data } = payload
+      
+      this.$vToastify.success(`${data._message}`);
+
+      this.form.amount = null
+
+      await this.setPenalty()
+    })
+  },
+  
   methods: {
+    async setPenalty() {
+      this.penalty = await this.drizzleInstance.contracts.ProductContract.methods
+        .penalty()
+        .call();
+    },
+
     onSubmit() {
       if (!this.validateForm()) {
         return;

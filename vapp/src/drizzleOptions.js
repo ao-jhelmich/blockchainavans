@@ -1,6 +1,4 @@
-import Flip from './contracts/Flip.json'
 import ProductContract from './contracts/ProductContract.json'
-import SimpleStorage from './contracts/SimpleStorage.json'
 
 const options = {
   web3: {
@@ -11,10 +9,16 @@ const options = {
     }
   },
   contracts: [
-    Flip,
     ProductContract,
-    SimpleStorage,
   ],
+  events: {
+    ProductContract: [
+      'ProductAdded',
+      'PaneltyAdded',
+      'PaneltyPayed',
+      'UserAdded',
+    ]
+  },
   polls: {
     accounts: 15000
   }

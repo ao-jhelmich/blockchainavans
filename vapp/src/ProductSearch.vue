@@ -89,12 +89,13 @@ export default {
   },
 
   methods: {
-    onSubmit() {
+    async onSubmit() {
       if (!this.validateForm()) {
         return;
       }
 
-      if (!this.validateBarcode()) {
+      const valid = await this.validateBarcode()
+      if (! valid) {
         return;
       }
 
@@ -112,9 +113,18 @@ export default {
       return true;
     },
 
-    validateBarcode() {
-      return true;
-      // @TODO check if product exists
+    async validateBarcode() {
+      try {
+        await this.drizzleInstance.contracts.ProductContract.methods
+          .getProduct
+          .cacheSend(this.form.barcode);
+
+        return true
+      } catch (error) {
+        
+        this.errors = 'Product bestaat niet'
+        return false
+      }
     },
   },
 };

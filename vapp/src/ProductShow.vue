@@ -63,14 +63,20 @@ export default {
     }
   },
 
+  mounted() {
+    this.$drizzleEvents.$on('drizzle/contractEvent', payload => {
+      const { data } = payload
+      
+      this.$vToastify.success(`${data._message}`);
+
+      this.form.country = null;
+    })
+  },
+
   async created() {
-      try {
-        this.product = await this.drizzleInstance.contracts.ProductContract.methods
-          .getProduct(this.barcode)
-          .send();
-      } catch (error) {
-        this.error = '[FOUTE BESTEMMING] Boete toegediend, check je boete overzicht'
-      }
+      this.product = await this.drizzleInstance.contracts.ProductContract.methods
+        .getProduct
+        .cacheSend(this.barcode);
   }
 }
 </script>

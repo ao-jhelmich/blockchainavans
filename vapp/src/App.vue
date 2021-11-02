@@ -68,6 +68,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'app',
 
-  computed: mapGetters('drizzle', ['isDrizzleInitialized'])
+  computed: mapGetters('drizzle', ['isDrizzleInitialized']),
 }
 </script>

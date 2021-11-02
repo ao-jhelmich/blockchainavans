@@ -142,20 +142,25 @@ export default {
     ...mapGetters("drizzle", ["drizzleInstance", "isDrizzleInitialized"]),
   },
 
+  mounted() {
+    this.$drizzleEvents.$on('drizzle/contractEvent', payload => {
+      const { data } = payload
+      
+      this.$vToastify.success(`${data._message}`);
+
+      this.form.barcode = null;
+      this.form.location = null;
+      this.form.name = null;
+    })
+  },
+
   methods: {
     onSubmit() {
       if (!this.validateForm()) {
         return;
       }
 
-      this.drizzleInstance.contracts["ProductContract"].methods[
-        "add"
-      ].cacheSend(this.form.barcode, this.form.location, this.form.name);
-
-      this.form.barcode = null;
-      this.form.location = null;
-      this.form.name = null;
-      // @TODO listen for add event, then clear input
+      this.drizzleInstance.contracts.ProductContract.methods.add.cacheSend(this.form.barcode, this.form.location, this.form.name);
     },
 
     validateForm() {

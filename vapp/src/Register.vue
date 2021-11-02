@@ -102,6 +102,16 @@ export default {
         .call();
   },
 
+  mounted() {
+    this.$drizzleEvents.$on('drizzle/contractEvent', payload => {
+      const { data } = payload
+      
+      this.$vToastify.success(`${data._message}`);
+
+      this.form.country = null;
+    })
+  },
+
   methods: {
     onSubmit() {
       if (!this.validateForm()) {
@@ -111,9 +121,6 @@ export default {
       this.drizzleInstance.contracts["ProductContract"].methods[
         "addUser"
       ].cacheSend(this.form.country);
-
-      // @TODO listen for add event, then clear input and refresh page
-      this.form.country = null;
     },
 
     validateForm() {
