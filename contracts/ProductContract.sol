@@ -3,6 +3,11 @@ pragma solidity >=0.4.21 <0.7.0;
 pragma experimental ABIEncoderV2;
 
 contract ProductContract {
+    event ProductAdded(string _message);
+    event PaneltyAdded(string _message);
+    event PaneltyPayed(string _message);
+    event UserAdded(string _message);
+
     struct ProductData {
         string name;
         string location;
@@ -18,6 +23,8 @@ contract ProductContract {
 
     function addUser(string memory location) public {
         users[msg.sender] = location;
+
+        emit UserAdded("Gebruiker toegevoegd");
     }
 
     function getProduct(uint barcode) public returns(ProductData memory) {
@@ -26,17 +33,19 @@ contract ProductContract {
         if (keccak256(bytes(users[msg.sender])) == keccak256(bytes(productStructs[barcode].location))) {
             return productStructs[barcode];
         } else {
-            penalties[msg.sender] = 5;
+            penalties[msg.sender] = penalties[msg.sender] + 5;
+            
+            emit PaneltyAdded("Boete toegekend");
         }       
     }
 
-    function add(uint barcode, string memory location, string memory name) public returns(uint) {
+    function add(uint barcode, string memory location, string memory name) public {
         if(productStructs[barcode].exists) revert ('Barcode already exists');
 
         productStructs[barcode] = ProductData(name, location, barcode, true);
         productList.push(barcode);
 
-        return barcode;
+        emit ProductAdded("Product succesvol toegevoegd!");
     }
     
     function all() view public returns(uint[] memory) {
@@ -53,6 +62,8 @@ contract ProductContract {
 
     function payPenalty() public payable {
         penalties[msg.sender] = penalties[msg.sender] - msg.value /(1 ether);
+
+        emit PaneltyPayed("Boete betaald!");
     }
 
     function checkUser() view public returns (string memory) {
