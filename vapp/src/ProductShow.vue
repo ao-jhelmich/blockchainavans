@@ -67,7 +67,7 @@ export default {
       try {
         this.product = await this.drizzleInstance.contracts.ProductContract.methods
           .getProduct(this.barcode)
-          .call();
+          .send();
       } catch (error) {
         this.error = '[FOUTE BESTEMMING] Boete toegediend, check je boete overzicht'
       }

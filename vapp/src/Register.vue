@@ -8,7 +8,7 @@
       </div>
 
       <div v-if="registered">
-        <p class="text-gray-700 text-2xl">Account is al reeds aangemeld, voor: <span v-text="registered"></span></p>
+        <p class="text-gray-700 text-2xl">Account is al reeds aangemeld, continent: <span v-text="registered"></span></p>
       </div>
 
       <form v-else action="#" method="POST">
@@ -79,10 +79,10 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "ProductForm",
+  name: "Register",
   data() {
     return {
-      countries: ["azie", "europa", "amerika", "oceanie", "arika"],
+      countries: ["azie", "europa", "amerika", "oceanie", "afrika"],
       registered: false,
       errors: null,
       form: {
@@ -112,7 +112,7 @@ export default {
         "addUser"
       ].cacheSend(this.form.country);
 
-      // @TODO listen for add event, then clear input
+      // @TODO listen for add event, then clear input and refresh page
       this.form.country = null;
     },
 

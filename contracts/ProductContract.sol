@@ -9,14 +9,9 @@ contract ProductContract {
         uint barcode;
         bool exists;
     }
-
-    struct PaneltyData {
-        uint barcode;
-        uint amount;
-    }
     
     mapping (address => string) public users; // the storage of the panelties
-    mapping (address => PaneltyData) public paneltyStrucs; // the storage of the panelties
+    mapping (address => uint) public penalties; // the storage of the panelties
 
     mapping (uint => ProductData) public productStructs; // the storage of the products
     uint[] public productList; // keeping track of the amount of products
@@ -31,9 +26,7 @@ contract ProductContract {
         if (keccak256(bytes(users[msg.sender])) == keccak256(bytes(productStructs[barcode].location))) {
             return productStructs[barcode];
         } else {
-            paneltyStrucs[msg.sender].amount = paneltyStrucs[msg.sender].amount + 1;
-
-            revert ('Penalty given, please check your panelties');
+            penalties[msg.sender] = 5;
         }       
     }
 
@@ -54,8 +47,12 @@ contract ProductContract {
         return productList.length;
     }
 
-    function panelty() view public returns (PaneltyData memory) {
-        return paneltyStrucs[msg.sender];
+    function penalty() view public returns (uint) {
+        return penalties[msg.sender];
+    }
+
+    function payPenalty() public payable {
+        penalties[msg.sender] = penalties[msg.sender] - msg.value /(1 ether);
     }
 
     function checkUser() view public returns (string memory) {

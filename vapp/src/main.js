@@ -11,6 +11,7 @@ import ProductForm from './ProductForm'
 import ProductSearch from './ProductSearch'
 import ProductShow from './ProductShow'
 import Register from './Register'
+import UserPenalty from './UserPenalty'
 
 
 Vue.use(Vuex)
@@ -30,6 +31,7 @@ const router = new VueRouter({
     { path: '/products/search', component: ProductSearch },
     { path: '/products/:barcode/show', component: ProductShow },
     { path: '/register', component: Register },
+    { path: '/penalties', component: UserPenalty },
   ]
 })
 
